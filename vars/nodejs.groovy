@@ -1,50 +1,52 @@
-pipeline {
+def call () {
+    pipeline {
 
-    agent any
+        agent any
 
-    stages {
+        stages {
 
-        stage('code quality') {
-            steps {
-                echo 'code quality'
-                sh 'env'
+            stage('code quality') {
+                steps {
+                    echo 'code quality'
+                    sh 'env'
+                }
             }
-        }
-        stage('style checks') {
-            when {
-                branch 'master'
+            stage('style checks') {
+                when {
+                    branch 'master'
+                }
+                steps {
+                    echo 'code quality'
+                }
             }
-            steps {
-                echo 'code quality'
-            }
-        }
 
-        stage('unit tests') {
-            when {
-                branch 'master'
+            stage('unit tests') {
+                when {
+                    branch 'master'
+                }
+                steps {
+                    echo 'unit test'
+                }
             }
-            steps {
-                echo 'unit test'
-            }
-        }
 
 
-        stage('download dependencies') {
-            when { tag "*" }
-            steps {
-                echo 'download dependencies'
+            stage('download dependencies') {
+                when { tag "*" }
+                steps {
+                    echo 'download dependencies'
+                }
             }
-        }
 
-        stage('prepare artifact') {
-            when { tag "*" }
-            steps {
-                echo 'prepare artifacts'
+            stage('prepare artifact') {
+                when { tag "*" }
+                steps {
+                    echo 'prepare artifacts'
+                }
             }
-        }
-        stage('publish artifacts') {
-            steps {
-                echo 'publish artifact'
+            stage('publish artifacts') {
+                steps {
+                    echo 'publish artifact'
+                }
             }
         }
     }
