@@ -5,6 +5,7 @@ def call () {
         agent any
 
         stages {
+
             common.codeQuality()
 
             stage('style checks') {
