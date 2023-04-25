@@ -17,7 +17,7 @@ def codeChecks() {
 }
 
 def artifacts() {
-    if ( BRANCH_NAME == "main" ) {
+    if ( BRANCH_NAME == "demo" ) {
 
         stage('Download Dependences') {
             echo 'Download Dependences'
