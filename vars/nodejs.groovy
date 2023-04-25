@@ -1,6 +1,8 @@
 def call () {
     env.APPTYPE = "nodejs"
-    pipeline {
+    nvm use <node-version>
+
+            pipeline {
 
         agent any
 
