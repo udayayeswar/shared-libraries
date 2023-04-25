@@ -3,28 +3,13 @@ def call () {
 
         common.codeQuality()
         common.codeChecks()
+        common.artifacts()
 
     }
     }
 
-//            stage('style checks') {
-//                when {
-//                    branch 'master'
-//                }
-//                steps {
-//                    echo 'code quality'
-//                }
-//            }
-//
-//            stage('unit tests') {
-//                when {
-//                    branch 'master'
-//                }
-//                steps {
-//                    echo 'unit test'
-//                }
-//            }
-//
+
+
 //
 //            stage('download dependencies') {
 //                when { tag "*" }

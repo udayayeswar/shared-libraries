@@ -16,3 +16,18 @@ def codeChecks() {
     }
 }
 
+def artifacts() {
+    if ( BRANCH_NAME == "main" ) {
+
+        stage('Download Dependences') {
+            echo 'Download Dependences'
+        }
+
+        stage('Prepare Artifacts') {
+            echo 'Prepare Artifacts'
+        }
+        stage('Publish Artifacts') {
+            echo 'Publish Artifacts'
+        }
+    }
+}
