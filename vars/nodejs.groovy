@@ -3,9 +3,9 @@ def call () {
         sh 'env'
         common.codeQuality()
 
-//        if ( branch == "main" || tag ==~ "*" ) {
+//        if ( BRANCH_NAME == "main" || tag ==~ "*" ) {
 //            stage('style checks') {
-//                echo 'code Quality'
+//                echo 'style checks'
 //            }
 //        }
     }
