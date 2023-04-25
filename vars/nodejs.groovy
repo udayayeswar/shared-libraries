@@ -3,7 +3,7 @@ def call () {
         sh 'env'
         common.codeQuality()
 
-        if ( BRANCH_NAME == "main" || tag ==~ "*" ) {
+        if ( BRANCH_NAME == "main" || TAG_NAME ==~ "*" ) {
             stage('style checks') {
                 echo 'style checks'
             }
