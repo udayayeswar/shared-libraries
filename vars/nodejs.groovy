@@ -5,13 +5,8 @@ def call () {
         agent any
 
         stages {
+            common.codeQuality()
 
-            stage('code quality') {
-                steps {
-                    echo 'code quality'
-                    sh 'env'
-                }
-            }
             stage('style checks') {
                 when {
                     branch 'master'
