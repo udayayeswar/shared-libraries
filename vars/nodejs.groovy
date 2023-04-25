@@ -2,7 +2,7 @@ def call () {
     node {
 
         common.codeQuality()
-        common.styleChecks()
+        common.codeChecks()
 
     }
     }

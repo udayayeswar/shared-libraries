@@ -3,10 +3,16 @@ def codeQuality () {
         echo 'code quality'
         }
     }
-def styleChecks() {
+def codeChecks() {
     if ( BRANCH_NAME == "main" || TAG_NAME ==~ ".*" ) {
+
         stage('style checks') {
             echo 'style checks'
         }
+
+        stage('unit test')
+           echo 'unit Test'
+
     }
 }
+
