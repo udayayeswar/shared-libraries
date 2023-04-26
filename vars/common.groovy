@@ -1,33 +1,41 @@
-def codeQuality () {
-    stage('code quality') {
-        echo 'code quality'
-        }
-    }
 def codeChecks() {
-    if ( BRANCH_NAME == "main" || TAG_NAME ==~ ".*" ) {
+
+    if (BRANCH_NAME == "main" || TAG_NAME ==~ ".*") {
 
         stage('style checks') {
             echo 'style checks'
         }
 
         stage('unit test')
-           echo 'unit Test'
+        echo 'unit Test'
 
     }
 }
+
+
+def codeQuality () {
+    stage('code quality') {
+        withCredentials([usernamePassword(credentialsId: 'APP_CREDS', passwordVariable: 'sonarPass', usernameVariable: 'sonarUser')]) {
+            sh '''
+              echo "codequality"
+              sonar-scanner -Dsonar.host.url=http://sonar.chaitu.net:9000 -Dsonar.login=${sonarUser} -Dsonar.password=${sonarPass} -Dsonar.projectKey=${COMPONENT} -Dsonar.qualitygate.wait=true ${SONAR_EXTRA_OPTS}
+             '''
+        }
+        }
+    }
 
 def artifacts() {
-    if ( BRANCH_NAME == "demo" ) {
+    if (BRANCH_NAME == "demo") {
 
         stage('Download Dependences') {
-            echo 'Download Dependences'
-        }
+                echo 'Download Dependences'
+            }
 
-        stage('Prepare Artifacts') {
-            echo 'Prepare Artifacts'
-        }
-        stage('Publish Artifacts') {
-            echo 'Publish Artifacts'
+            stage('Prepare Artifacts') {
+                echo 'Prepare Artifacts'
+            }
+            stage('Publish Artifacts') {
+                echo 'Publish Artifacts'
+            }
         }
     }
-}
