@@ -18,8 +18,8 @@ def codeQuality () {
         withCredentials([usernamePassword(credentialsId: 'SONAR', passwordVariable: 'sonarPass', usernameVariable: 'sonarUser')]) {
             sh '''
               echo "codequality"
-              sonar-scanner -Dsonar.host.url=http://172.16.3.114:9000 -Dsonar.login=${sonarUser} -Dsonar.password=${sonarPass} -Dsonar.projectKey=${COMPONENT} -Dsonar.qualitygate.wait=true ${SONAR_EXTRA_OPTS}
-             '''
+              /opt/sonar-scanner/bin/sonar-scanner -Dsonar.host.url=http://172.16.3.114:9000 -Dsonar.login=${sonarUser} -Dsonar.password=${sonarPass}  -Dsonar.projectKey=node-app -Dsonar.qualitygate.wait=true
+            '''
         }
         }
     }
