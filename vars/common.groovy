@@ -2,6 +2,11 @@ def codeChecks() {
 
     if (BRANCH_NAME == "main" || TAG_NAME ==~ ".*") {
 
+
+        stage('code checkout') {
+
+            git branch: 'main', url: "https://github.com/udayayeswar/${COMPONENT}.git"
+        }
         stage('style checks') {
             echo 'style checks'
         }
