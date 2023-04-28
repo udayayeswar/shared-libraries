@@ -2,8 +2,8 @@ def call () {
     node (env.RUNNER)
         {
             common.codeCheckout()
-            common.codeChecks
             common.codeQuality()
+            common.codeChecks
             common.artifacts()
 
         }
