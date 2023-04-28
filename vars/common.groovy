@@ -4,9 +4,9 @@ def codeChecks() {
 
 
         stage('code checkout') {
-
+            sh 'find . | sed 1d |xargs rm -rf'
             git branch: 'main', url: "https://github.com/udayayeswar/${COMPONENT}.git"
-            sh "ls"
+
         }
         stage('style checks') {
             echo 'style checks'
