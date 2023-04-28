@@ -1,4 +1,4 @@
-def codeChecks() {
+def codeCheckout() {
 
     if (BRANCH_NAME == "main" || TAG_NAME ==~ ".*") {
 
@@ -8,18 +8,13 @@ def codeChecks() {
             git branch: 'main', url: "https://github.com/udayayeswar/${COMPONENT}.git"
 
         }
-        stage('style checks') {
-            echo 'style checks'
-        }
 
-        stage('unit test')
-        echo 'unit Test'
 
     }
 }
 
 
-def codeQuality () {
+def codeQuality() {
     stage('code quality') {
         withCredentials([usernamePassword(credentialsId: 'SONAR', passwordVariable: 'sonarPass', usernameVariable: 'sonarUser')]) {
             sh '''
@@ -29,6 +24,19 @@ def codeQuality () {
         }
         }
     }
+def codeChecks() {
+    if (env.BRANCH_NAME == "main" || env.TAG_NAME ==~ ".*") {
+
+
+        stage('style checks') {
+            echo 'style checks'
+        }
+
+        stage('unit test') {
+            echo 'unit Test'
+        }
+    }
+}
 
 def artifacts() {
     if (BRANCH_NAME == "demo") {
