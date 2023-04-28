@@ -3,7 +3,7 @@ def call () {
         {
             common.codeCheckout()
             common.codeQuality()
-            common.codeChecks
+            common.codeChecks()
             common.artifacts()
 
         }
