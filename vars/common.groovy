@@ -39,17 +39,26 @@ def codeChecks() {
 }
 
 def artifacts() {
-    if (BRANCH_NAME == "main") {
+    if (env.TAG_NAME ==~ ".*") {
 
-        stage('Download Dependences') {
-                echo 'Download Dependences'
+        stage('Prepare Artifacts') {
+            if (env.APPTYPE == "nodejs") {
+                sh '''
+          npm install 
+          zip -r ${COMPONENT}-${TAG_NAME}.zip node_modules index.js views public model
+        '''
             }
 
-            stage('Prepare Artifacts') {
-                echo 'Prepare Artifacts'
-            }
-            stage('Publish Artifacts') {
-                echo 'Publish Artifacts'
+
+            if (env.APPTYPE == "java") {
+                sh '''
+          mvn clean package 
+          mv target/status-1.0-SNAPSHOT.jar ${COMPONENT}-1.0-SNAPSHOT.jar 
+          zip -r ${COMPONENT}-${TAG_NAME}.zip ${COMPONENT}-1.0-SNAPSHOT.jar
+        '''
             }
         }
+
+
     }
+}
