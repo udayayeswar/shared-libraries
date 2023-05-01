@@ -58,7 +58,15 @@ def artifacts() {
         '''
             }
         }
+        if (env.TAG_NAME ==~ ".*") {
 
-
+            stage('Publish Artifacts') {
+                withCredentials([usernamePassword(credentialsId: 'APP_CREDS', passwordVariable: 'nexusPass', usernameVariable: 'nexusUser')]) {
+                    sh '''
+         curl -v -u ${nexusUser}:${nexusPass} --upload-file ${COMPONENT}-${TAG_NAME}.zip http://nexus.chaitu.net:8081/repository/${COMPONENT}/${COMPONENT}-${TAG_NAME}.zip
+       '''
+                }
+            }
+        }
     }
 }
